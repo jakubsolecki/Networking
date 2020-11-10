@@ -14,13 +14,13 @@ def analyze_ip(ip_addr):
 
     if 1 <= ip_addr[0] <= 127:
         table.append(["Class", "A"])
-        ip_addr_str = ip_addr[0]
+        ip_addr_str = str(ip_addr[0])
         table.append(["Network address", ip_addr_str + ".0"*3])
         table.append(["Network broadcast", ip_addr_str + ".255"*3])
     elif 128 <= ip_addr[0] <= 191:
         table.append(["Class", "B"])
         ip_addr_str = ".".join(str(ip_addr[i]) for i in range(2))
-        table.append(["Network address", ip_addr_str + ".0" * 2])
+        table.append(["Network address", ip_addr_str + ".0"*2])
         table.append(["Network broadcast", ip_addr_str + ".255"*2])
     elif 192 <= ip_addr[0] <= 223:
         table.append(["Class", "C"])
