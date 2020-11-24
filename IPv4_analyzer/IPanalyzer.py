@@ -51,8 +51,11 @@ def analyze_ip(ip_addr):
     subnet_broadcast_address_str = ".".join([str(elem) for elem in subnet_broadcast_address])
     table.append(["Subnet broadcast", subnet_broadcast_address_str])
 
+    # TODO rewrite
     host_range_str = ".".join(str(elem) if elem != 0 else str(1) for elem in subnet_address) + " - " + \
-                     ".".join(str(elem) if elem != 255 else str(254) for elem in subnet_broadcast_address)
+                     ".".join(str(elem) for elem in subnet_broadcast_address[:3]) + "." + \
+                     (str(subnet_broadcast_address[3] - 1))
+
     table.append(["Host address range", host_range_str])
 
     table.append(["Possible hosts", host_count])
