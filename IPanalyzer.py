@@ -16,21 +16,21 @@ def analyze_ip(ip_addr):
         table.append(["Class", "A"])
         ip_addr_str = str(ip_addr[0])
         table.append(["Network address", ip_addr_str + ".0"*3])
-        table.append(["Network broadcast", ip_addr_str + ".255"*3])
+        table.append(["Directed broadcast", ip_addr_str + ".255"*3])
     elif 128 <= ip_addr[0] <= 191:
         table.append(["Class", "B"])
         ip_addr_str = ".".join(str(ip_addr[i]) for i in range(2))
         table.append(["Network address", ip_addr_str + ".0"*2])
-        table.append(["Network broadcast", ip_addr_str + ".255"*2])
+        table.append(["Directed broadcast", ip_addr_str + ".255"*2])
     elif 192 <= ip_addr[0] <= 223:
         table.append(["Class", "C"])
         ip_addr_str = ".".join(str(ip_addr[i]) for i in range(3))
         table.append(["Network address", ip_addr_str + ".0"])
-        table.append(["Network broadcast", ip_addr_str + ".255"])
+        table.append(["Directed broadcast", ip_addr_str + ".255"])
     elif 224 <= ip_addr[0] <= 239:
         print("Class: D - Multicast")
         sys.exit(0)
-    elif 240 <= ip_addr[0] <= 254:
+    elif 240 <= ip_addr[0] <= 255:
         print("Class: E - Reserved")
         sys.exit(0)
 
@@ -51,8 +51,7 @@ def analyze_ip(ip_addr):
     subnet_broadcast_address_str = ".".join([str(elem) for elem in subnet_broadcast_address])
     table.append(["Subnet broadcast", subnet_broadcast_address_str])
 
-    # TODO rewrite
-    host_range_str = ".".join(str(elem) if elem != 0 else str(1) for elem in subnet_address) + " - " + \
+    host_range_str = ".".join(str(elem) for elem in subnet_address) + " - " + \
                      ".".join(str(elem) for elem in subnet_broadcast_address[:3]) + "." + \
                      (str(subnet_broadcast_address[3] - 1))
 
